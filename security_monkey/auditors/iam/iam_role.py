@@ -28,6 +28,7 @@ from security_monkey.datastore import Account
 
 import re
 
+
 class IAMRoleAuditor(IAMPolicyAuditor):
     index = IAMRole.index
     i_am_singular = IAMRole.i_am_singular
@@ -81,9 +82,10 @@ class IAMRoleAuditor(IAMPolicyAuditor):
             def check_account_in_arn(arn):
                 m = re.match(r'arn:aws:iam::([0-9*]+):', arn)
                 if m.group(1):
-                    account = Account.query.filter(Account.number==m.group(1)).first()
+                    account = Account.query.filter(Account.number == m.group(1)).first()
                     if not account:
-                        tag = "{0} allows assume-role from an Unkown Account ({1})".format(self.i_am_singular, m.group(1))
+                        tag = "{0} allows assume-role from an Unkown Account ({1})".format(self.i_am_singular,
+                                                                                           m.group(1))
                         self.add_issue(10, tag, iamrole_item, notes=json.dumps(statement))
 
             action = statement.get("Action", None)
