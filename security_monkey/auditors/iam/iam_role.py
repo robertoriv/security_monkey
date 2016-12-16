@@ -71,9 +71,9 @@ class IAMRoleAuditor(IAMPolicyAuditor):
         elif type(statement) is dict:
             check_statement(statement)
 
-    def check_assume_role_policy_from_unknown_account(self, iamrole_item):
+    def check_assume_role_from_unknown_account(self, iamrole_item):
         """
-        alert when an IAM Role has an assume_role_policy_document but granting access to an unknown account
+        alert when an IAM Role has an assume_role_policy_document granting access to an unknown account
         """
 
         def check_statement(statement):
