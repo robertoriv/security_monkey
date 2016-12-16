@@ -84,7 +84,7 @@ class IAMRoleAuditor(IAMPolicyAuditor):
                 if m.group(1):
                     account = Account.query.filter(Account.number == m.group(1)).first()
                     if not account:
-                        tag = "{0} allows assume-role from an Unkown Account ({1})".format(self.i_am_singular,
+                        tag = "{0} allows assume-role from an Unknown Account ({1})".format(self.i_am_singular,
                                                                                            m.group(1))
                         self.add_issue(10, tag, iamrole_item, notes=json.dumps(statement))
 
